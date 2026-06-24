@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yanz — Some sosmed from yanz</title>
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & VARIABLES (Zen / Wabi-Sabi Inspired)
+           ========================================================================== */
+        :root {
+            --primary: #0077B6;       /* Ocean Blue */
+            --dark-navy: #023E8A;     /* Deep Accent */
+            --bg: #FAFAFA;            /* Soft Off-White */
+            --surface: #FFFFFF;
+            --text: #2B2D42;
+            --text-muted: #6C757D;
+            --border: rgba(0, 119, 182, 0.15);
+            --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --transition: cubic-bezier(0.25, 1, 0.5, 1) 0.4s;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0A0F1D;
+            --surface: #121A2E;
+            --text: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border: rgba(255, 255, 255, 0.1);
+            --dark-navy: #90E0EF;     /* Inverted accent clarity */
+        }
+
+        /* ==========================================================================
+           2. BASE STYLES & RESET
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: var(--font);
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color var(--transition), color var(--transition);
+        }
+
+        body {
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==========================================================================
+           3. LAYOUT & STRUCTURE
+           ========================================================================== */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 40px 0; /* Compact Zen section spacing */
+        }
+
+        /* Header & Navigation (Asymmetrical & Centered Logo) */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-top: -8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Utilities Controls */
+        .header-controls {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 20px;
+            color: var(--text);
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Mobile Menu Hamburger */
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+        .burger span {
+            width: 25px;
+            height: 2px;
+            background-color: var(--text);
+            transition: var(--transition);
+        }
+
+        /* ==========================================================================
+           4. HERO SECTION (Animated Subtle Zen Gradient)
+           ========================================================================== */
+        .hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(-45deg, #0077B6, #023E8A, #0096C7, #03045E);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-content {
+            max-width: 600px;
+            /* Intentional Wabi-Sabi Asymmetry offset */
+            margin-left: 5%; 
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 2px solid white;
+            color: white;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .cta-btn:hover {
+            background: white;
+            color: var(--dark-navy);
+        }
+
+        /* ==========================================================================
+           5. MASONRY / PINTEREST-STYLE GRID LAYOUT (Asymmetrical Column spans)
+           ========================================================================== */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        .grid-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,77,182,0.06);
+        }
+
+        /* Wabi-Sabi Asymmetric Grid Mapping */
+        .item-tall  { grid-column: span 4; grid-row: span 2; }
+        .item-wide  { grid-column: span 8; }
+        .item-norm  { grid-column: span 4; }
+        .item-full  { grid-column: span 12; }
+
+        .article-img {
+            width: 100%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            filter: grayscale(20%);
+            transition: var(--transition);
+        }
+        .grid-item:hover .article-img {
+            filter: grayscale(0%);
+        }
+
+        .item-tall .article-img { height: 320px; }
+        .item-wide .article-img { height: 220px; }
+        .item-norm .article-img { height: 180px; }
+
+        .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--primary);
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .grid-item h3 {
+            font-size: 1.3rem;
+            color: var(--dark-navy);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .grid-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            align-self: flex-start;
+            border-bottom: 1px solid var(--primary);
+            padding-bottom: 2px;
+        }
+
+        /* ==========================================================================
+           6. ABOUT / LINKS SECTION
+           ========================================================================== */
+        .about-section {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .about-wrap {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .about-wrap h2 {
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .social-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .social-btn {
+            padding: 12px 25px;
+            border: 1px solid var(--border);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-btn:hover {
+            background: var(--dark-navy);
+            color: white;
+            border-color: var(--dark-navy);
+        }
+
+        /* ==========================================================================
+           7. FAT FOOTER (Newsletter, Links, Map, Systems)
+           ========================================================================== */
+        footer {
+            background: #023E8A;
+            color: #E2E8F0;
+            padding: 60px 0 30px 0;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h4 {
+            font-size: 1.5rem;
+            color: #white;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .footer-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #90E0EF;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a:hover {
+            color: #90E0EF;
+            padding-left: 4px;
+        }
+
+        /* Newsletter Form */
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .newsletter-form input[type="email"] {
+            padding: 12px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-form input::placeholder {
+            color: #94A3B8;
+        }
+
+        .newsletter-form button {
+            padding: 12px;
+            background: #0077B6;
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: #90E0EF;
+            color: #023E8A;
+        }
+
+        /* Interactive Map Container */
+        .map-container {
+            width: 100%;
+            height: 150px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 0.75rem;
+            color: #94A3B8;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #94A3B8;
+        }
+
+        /* ==========================================================================
+           8. ANIMATION ENGINE & INTERACTION
+           ========================================================================== */
+        /* Scroll Trigger Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered Delays via Engine */
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* Back To Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ==========================================================================
+           9. RESPONSIVE BREAKPOINTS (Tablet & Mobile Adaptive layouts)
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .item-tall, .item-wide, .item-norm, .item-full {
+                grid-column: span 1;
+                grid-row: auto;
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-controls {
+                right: 60px;
+            }
+            .burger {
+                display: flex;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: var(--bg);
+                padding: 20px;
+                border-bottom: 1px solid var(--border);
+                text-align: center;
+                gap: 20px;
+            }
+            .nav-links.mobile-open {
+                display: flex;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">Yanz</div>
+            <div class="tagline">Some sosmed from yanz</div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#magazine">Magazine</a></li>
+                <li><a href="#links">Channels</a></li>
+                <li><a href="#subscribe">Newsletter</a></li>
+            </ul>
+
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">Theme</button>
+            </div>
+
+            <button class="burger" id="mobMenuBtn" aria-label="Open Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="reveal">Some about yanz, social media, and some roleplay servers</h1>
+            <p class="reveal delay-1">Exploring the spaces where design, community networks, and modern subcultures converge gracefully.</p>
+            <a href="#magazine" class="cta-btn reveal delay-2">Enter Journal</a>
+        </div>
+    </section>
+
+    <section class="container" id="magazine">
+        <div class="grid-container">
+            
+            <article class="grid-item item-tall reveal">
+                <div>
+                    <span class="tag">Yandi Wijaya</span>
+                    <img src="https://cdn.discordapp.com/attachments/1455483202251657367/1519141944142336020/quality_restoration_20260623075542086.jpg?ex=6a3c7aaf&is=6a3b292f&hm=ce97665c57fe857dc84bea6b8b74661023c7d97fc6d2a458b25b7abb48e40649&" alt="Yandi Wijaya" class="article-img">
+                    <h3>information about him, a graduate of Bayah High School</h3>
+                    <p>An ordinary worker and looking for another job, and also part of the staff or admin on the MAYDAY ROLEPLAY server.</p>
+                </div>
+                <a href="#" class="read-more">Read Essay</a>
+            </article>
+
+            <article class="grid-item item-wide reveal delay-1">
+                <div>
+                    <span class="tag">MAYDAY ROLEPLAY</span>
+                    <img src="https://cdn.discordapp.com/attachments/1437784254661787851/1437784356226732146/MAYDAY_Gif.gif?ex=6a3c7947&is=6a3b27c7&hm=18a4c6724ba7b8d0343b16f9de7ba7d459f21135dcd28a5ec11221234509ce03&" alt="Official maydays roleplay" class="article-img">
+                    <h3>Some information about Mayday Roleplay</h3>
+                    <p>Mayday was founded on September 30, 2024, by Ciboyy, Embah, Mamathir, Jonathan, and many other contributing staff. This server was once a successful server, reaching over 800 on-demand (IC) during its heyday. The server is still active today, having been around for over a year, and currently still reaches over 200 on-demand (IC) at night.</p>
+                </div>
+                <a href="https://discord.gg/YnR7RCkW2m" class="read-more">Join Server Now</a>
+            </article>
+
+            <article class="grid-item item-norm reveal">
+                <div>
+                    <span class="tag">BOEMI PERTIWI ROLEPLAY</span>
+                    <img src="https://cdn.discordapp.com/attachments/1455483202251657367/1519163560704479313/Proyek_Baru_1_FB2C59F.png?ex=6a3c8ed1&is=6a3b3d51&hm=0bfeab8ac69d8c70c8433ce963233b319611ae091f7c275d32f25d0e75740105&" alt="BOEMI PERTIWI logo" class="article-img">
+                    <h3>About BOEMI PERTIWI ROLEPLAY</h3>
+                    <p>BPRP (Boemi Pertiwi Roleplay) server was founded on April 4 2026 by several people, namely Zidan, Kazuhiro, and several other staff who also contributed, this server is still in the process of having features that are no less cool, and will probably be released in July-August</p>
+                </div>
+                <a href="https://discord.gg/ax9AfYsVt7" class="read-more">Join Server Now</a>
+            </article>
+
+            <article class="grid-item item-full reveal delay-1">
+                <div>
+                    <span class="tag">MY TIKTOK ACCOUNT</span>
+                    <img src="https://cdn.discordapp.com/attachments/1455483202251657367/1518808598434676736/1782182556407.png?ex=6a3becfb&is=6a3a9b7b&hm=7b9d09abcc1d6f771e460db6d43e65d31374947e3709276ecaa89398360aa840&" alt="Profil Tiktok Idoyokk" class="article-img">
+                    <h3>Yanz's Tiktok Account</h3>
+                    <p>Yanz also likes to make content about roleplay, beat videos (JJ) and also about mobile legends</p>
+                </div>
+                <a href="https://www.tiktok.com/@idoyokk?_r=1&_t=ZS-97SvZDltjtq" class="read-more">Go to Tiktok</a>
+            </article>
+
+        </div>
+    </section>
+
+    <section class="about-section" id="links">
+        <div class="container about-wrap">
+            <h2 class="reveal">The Hub of Yanz</h2>
+            <p class="reveal delay-1">Authentic extensions of my daily curation workflow. Drop by, say hello, or immerse yourself within our growing community ecosystems.</p>
+            
+            <div class="social-cards reveal delay-2">
+                <a href="https://discord.gg/YnR7RCkW2m" target="_blank" rel="noopener" class="social-btn">
+                    <span>Discord Server MDRP</span>
+                </a>
+                <div class="social-cards reveal delay-2">
+                <a href="https://discord.gg/ax9AfYsVt7" target="_blank" rel="noopener" class="social-btn">
+                    <span>Discord Server BPRP</span>
+                </a>
+                <a href="https://cdn.discordapp.com/attachments/1455483202251657367/1518808598434676736/1782182556407.png?ex=6a3becfb&is=6a3a9b7b&hm=7b9d09abcc1d6f771e460db6d43e65d31374947e3709276ecaa89398360aa840&" target="_blank" rel="noopener" class="social-btn">
+                    <span>TikTok Profil</span>
+                </a>
+                <a href="https://www.instagram.com/yandiwijaya24?igsh=MXR0eTQyZWFyYTc1aA==" target="_blank" rel="noopener" class="social-btn">
+                    <span>Instagram Profil</span>
+                </a>
+                <a href="https://saweria.co/idoyook" target="_blank" rel="noopener" class="social-btn">
+                    <span>Support Me</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="subscribe">
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-brand">
+                    <h4>YANZ</h4>
+                    <p style="opacity: 0.7; margin-top:10px;">Deliberate minimalism. Strategic connectivity. Form, essence, and community combined.</p>
+                </div>
+
+                <div>
+                    <h5 class="footer-title">Navigation</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home Base</a></li>
+                        <li><a href="#magazine">The Magazine</a></li>
+                        <li><a href="#links">Social Ecosystem</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="footer-title">Stay Informed</h5>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="your.email@domain.com" required aria-label="Email Field">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+
+                <div>
+                    <h5 class="footer-title">Headquarters</h5>
+                    <div class="map-container">
+                        <div class="map-placeholder">
+                            <p><strong>Kyoto Studio Offset</strong></p>
+                            <p style="font-size:0.65rem; margin-top:4px; opacity:0.7">35.0116° N, 135.7681° E</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Yanz. Built thoughtfully using vanilla systems.</p>
+                <p>Designed with Intentional Asymmetry</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="scrollTopBtn" aria-label="Scroll to top">↑</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* 1. Mobile Hamburger System Toggle */
+            const mobMenuBtn = document.getElementById('mobMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+
+            mobMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('mobile-open');
+            });
+
+            // Close mobile menu immediately upon anchor click
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('mobile-open');
+                });
+            });
+
+            /* 2. Light / Dark Mode Toggle Implementation */
+            const themeToggle = document.getElementById('themeToggle');
+            const rootElement = document.documentElement;
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = rootElement.getAttribute('data-theme');
+                const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+                rootElement.setAttribute('data-theme', nextTheme);
+            });
+
+            /* 3. Intersection Observer for Scroll Animations */
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.05, // Trigger quickly when element hits the bottom edge
+                rootMargin: "0px 0px -20px 0px"
+            });
+
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
+            });
+
+            /* 4. Back To Top Visibility Controller */
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+            window.addEventListener('scroll', () => {
+                if(window.scrollY > 400) {
+                    scrollTopBtn.classList.add('show');
+                } else {
+                    scrollTopBtn.classList.remove('show');
+                }
+            });
+
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            /* 5. Newsletter Form Submission Handling */
+            const newsletterForm = document.getElementById('newsletterForm');
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for subscribing to Yanz. Your transmission was successfully captured.');
+                newsletterForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
